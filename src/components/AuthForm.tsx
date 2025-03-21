@@ -37,14 +37,14 @@ export const AuthForm = ({
         <div className="space-y-2">
           <div className="relative">
             <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-            <input type="email" placeholder="Электронная почта" value={email} onChange={e => setEmail(e.target.value)} required className="auth-input pl-10 mx-[2px]" />
+            <input type="email" placeholder="Электронная почта" value={email} onChange={e => setEmail(e.target.value)} required className="auth-input pl-10 mx-[2px] px-[45px]" />
           </div>
         </div>
         
         <div className="space-y-2">
           <div className="relative">
             <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-            <input type={showPassword ? "text" : "password"} placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} required className="auth-input pl-10 mx-[2px]" />
+            <input type={showPassword ? "text" : "password"} placeholder="Пароль" value={password} onChange={e => setPassword(e.target.value)} required className="auth-input pl-10 mx-[2px] px-[45px]" />
             <button type="button" onClick={togglePasswordVisibility} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
               {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
             </button>
