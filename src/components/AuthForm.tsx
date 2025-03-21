@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Building, Eye, EyeOff, Lock, Mail } from "lucide-react";
+import { Eye, EyeOff, Lock, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -13,18 +13,16 @@ export const AuthForm = ({
   className
 }: AuthFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [domain, setDomain] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log({
-      email,
-      password,
-      domain
+      login,
+      password
     });
-    // Domain authentication logic would go here
+    // Authentication logic would go here
   };
 
   const togglePasswordVisibility = () => {
@@ -45,26 +43,12 @@ export const AuthForm = ({
       <form onSubmit={handleSubmit} className="space-y-4 animate-slide-up">
         <div className="space-y-2">
           <div className="relative">
-            <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+            <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
             <Input 
               type="text" 
-              placeholder="Домен организации" 
-              value={domain} 
-              onChange={(e) => setDomain(e.target.value)} 
-              required 
-              className="pl-10"
-            />
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-            <Input 
-              type="email" 
-              placeholder="Корпоративная почта" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
+              placeholder="Логин" 
+              value={login} 
+              onChange={(e) => setLogin(e.target.value)} 
               required 
               className="pl-10"
             />
@@ -105,7 +89,7 @@ export const AuthForm = ({
       
       <div className="mt-8 text-center text-sm text-muted-foreground animate-fade-in">
         <p>Сервис предназначен для корпоративных пользователей</p>
-        <p className="mt-2">Для получения сертификата необходима авторизация через домен организации</p>
+        <p className="mt-2">Для получения сертификата необходима корпоративная авторизация</p>
       </div>
     </div>
   );
