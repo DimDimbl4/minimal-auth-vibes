@@ -24,6 +24,9 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   useEffect(() => {
     const root = window.document.documentElement;
+    
+    // Add transition class before changing theme
+    root.classList.add("transition-colors");
     root.classList.remove("light", "dark");
     root.classList.add(theme);
   }, [theme]);
