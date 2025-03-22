@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import { Eye, EyeOff, Lock, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 type AuthFormProps = {
   className?: string;
@@ -15,14 +17,38 @@ export const AuthForm = ({
   const [showPassword, setShowPassword] = useState(false);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({
-      login,
-      password
-    });
-    // Authentication logic would go here
+    
+    // Simple validation
+    if (!login || !password) {
+      toast({
+        title: "Ошибка авторизации",
+        description: "Пожалуйста, заполните все поля",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    setIsLoading(true);
+    
+    // Simulate authentication process
+    setTimeout(() => {
+      // In a real app, validate credentials against a backend
+      console.log("Authentication successful for:", login);
+      
+      toast({
+        title: "Успешная авторизация",
+        description: "Добро пожаловать в систему сертификации",
+      });
+      
+      setIsLoading(false);
+      navigate("/dashboard");
+    }, 1500);
   };
 
   const togglePasswordVisibility = () => {
@@ -51,6 +77,7 @@ export const AuthForm = ({
               onChange={(e) => setLogin(e.target.value)} 
               required 
               className="pl-10"
+              disabled={isLoading}
             />
           </div>
         </div>
@@ -65,11 +92,13 @@ export const AuthForm = ({
               onChange={(e) => setPassword(e.target.value)} 
               required 
               className="pl-10"
+              disabled={isLoading}
             />
             <button 
               type="button" 
               onClick={togglePasswordVisibility} 
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+              disabled={isLoading}
             >
               {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
             </button>
@@ -82,8 +111,8 @@ export const AuthForm = ({
           </button>
         </div>
         
-        <Button type="submit" className="w-full" size="lg">
-          Авторизоваться в системе
+        <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
+          {isLoading ? "Авторизация..." : "Авторизоваться в системе"}
         </Button>
       </form>
       
