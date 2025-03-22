@@ -8,6 +8,10 @@ import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import { ThemeProvider } from "./components/ThemeProvider";
+import CertificateDetails from "./pages/CertificateDetails";
+import Profile from "./pages/Profile";
+import SecurityTraining from "./pages/SecurityTraining";
+import CompanyRegulations from "./pages/CompanyRegulations";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +25,10 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/certificate/:id" element={<CertificateDetails />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/security-training" element={<SecurityTraining />} />
+            <Route path="/company-regulations" element={<CompanyRegulations />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
